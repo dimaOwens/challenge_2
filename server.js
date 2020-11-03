@@ -8,24 +8,32 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const csv = require('csv-parser');
 const fs = require('fs');
-
+const { body, validationResult } = require('express-validator');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
+
+
+
+app.use(express.urlencoded({
+    extended: true
+}))
+app.use(express.json())
 app.get('/', (req, res) => {
     res.send("hello back")
 })
 var data = [] //returned string
 
 app.post('/', (req, res) => {
-    console.log(req.body)
+
+
     const pathA = './out.csv'
 
     try {
         fs.unlinkSync(pathA)
-        console.log("REMOVEDDDDD")
+        console.log("REMOVED")
         //file removed
     } catch (err) {
-        console.log("OOOOOOOPS DIDN'T REMOVE")
+        console.log("OOps")
     }
     data = []
 
@@ -42,6 +50,8 @@ app.post('/', (req, res) => {
         ]
     });
     var g_a = function (all) {
+        console.log(all)
+        console.log(typeof all)
         var obj = {}
         obj["firstName"] = all["firstName"]
         obj["lastName"] = all["lastName"]
@@ -49,8 +59,10 @@ app.post('/', (req, res) => {
         obj["city"] = all["city"]
         obj["role"] = all["role"]
         obj["sales"] = all["sales"]
+
         data.push(obj)
-        console.log(all["children"])
+
+
         if (all["children"].length !== 0) {
             for (var i = 0; i < all["children"].length; i++) {
                 g_a(all["children"][i])
@@ -59,17 +71,21 @@ app.post('/', (req, res) => {
         }
     }
 
-    g_a(req.body);
 
+    if (typeof req.body.full === 'string') {
+        g_a(JSON.parse(req.body.full));
+    }
+    else {
+        g_a(req.body.full);
+    }
 
     csvWriter
         .writeRecords(data)
         .then(() => console.log('The CSV file was written successfully'))
         .catch(() => console.log("ERR in writing CSV file"))
         .then(() => res.sendFile(path.join(__dirname, '/out.csv')))
-    //res.set('Content-Type', 'application/octet-stream');
-    // res.send(out.csv);
-    // res.sendFile(path.join(__dirname, '/out.csv'));
+
+
 })
 app.listen(port, () => console.log(`Server is listening to port ${port}`))
 
