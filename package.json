@@ -1,0 +1,30 @@
+{
+  "name": "challenge_2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimaOwens/challenge_2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimaOwens/challenge_2/issues"
+  },
+  "homepage": "https://github.com/dimaOwens/challenge_2#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csv-parser": "^2.3.3",
+    "csv-writer": "^1.6.0",
+    "express": "^4.17.1",
+    "json2csv": "^5.0.3",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.6"
+  }
+}
