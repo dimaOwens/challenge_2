@@ -6,11 +6,3 @@ Allen,Price,San Mateo,Burlingame,Sales Person,2500000
 Beth,Johnson,San Francisco,San Francisco,Broker/Sales Person,7500000
 
 
-
-FirstName,LastName,Country,City,Role,Sales
-Joshie,Wyattson,,San Mateo,Broker,1000000
-Beth Jr.,Johnson,,Pacifica,Manager,2900000
-Smitty,Won,,Redwood City,Sales Person,4800000
-Allen,Price,,Burlingame,Sales Person,2500000
-Beth,Johnson,,San Francisco,Broker/Sales Person,7500000
-

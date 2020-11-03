@@ -1,4 +1,4 @@
-<!-- html , then choose html5-->
+<!-- html , then choose html5  <button type="submit" id="sub">Submit</button> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,13 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV Report generator</title>
-    <script src="app.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
 </head>
 
 <body>
-    <textarea id="t_a"></textarea>
-    <button type="submit" id="sub" onclick="submit()">Submit</button>
+    <form method="post" id="myForm" action="http://127.0.0.1:3000/" target="_blank">
+        <textarea id="t_a"></textarea>
+        <input type="button" onclick="myFunction()" value="Submit form">
+    </form>
+    <script src="app.js"></script>
 </body>
 
 </html>

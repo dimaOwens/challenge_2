@@ -1,7 +1,16 @@
 
 
-var submit = function () {
-    //send post req to server 
 
+
+
+
+
+function myFunction() {
+    document.getElementById("myForm").submit();
 }
-var json_t = document.getElementById('')
+// document.getElementById("sub").addEventListener("click", () => {
+//     var data = document.getElementById("t_a").value;
+
+// });
+
+
