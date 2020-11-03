@@ -12,30 +12,56 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 app.get('/', (req, res) => {
     res.send("hello back")
 })
-var r_s = [] //returned string
+var data = [] //returned string
+
 app.post('/', (req, res) => {
-    console.log(req.body)
+
+
     const csvWriter = createCsvWriter({
+        path: 'out.csv',
+        header: [
+            { id: 'firstName', title: 'FirstName' },
+            { id: 'lastName', title: 'LastName' },
+            { id: 'county', title: 'County' },
+            { id: 'city', title: 'City' },
+            { id: 'role', title: 'Role' },
+            { id: 'sales', title: 'Sales' },
+        ]
+    });
+    var g_a = function (all) {
+        var obj = {}
+        obj["firstName"] = all["firstName"]
+        obj["lastName"] = all["lastName"]
+        obj["county"] = all["county"]
+        obj["city"] = all["city"]
+        obj["role"] = all["role"]
+        obj["sales"] = all["sales"]
+        data.push(obj)
+        if (all["children"].length !== 0) {
+            for (var i = 0; i < all["children"].length; i++) {
+                g_a(all["children"][i])
+            }
+
+        }
+    }
+
+    g_a(req.body);
 
 
-        console.log(data)
+
+
+
+
     csvWriter
         .writeRecords(data)
-            .then(() => console.log('The CSV file was written successfully'));
-        res.send("ok done")
-    })
-    app.listen(port, () => console.log(`Server is listening to port ${port}`))
+        .then(() => console.log('The CSV file was written successfully'));
+    // res.set('Content-Type', 'application/octet-stream');
+    // res.send(out.csv);
+    res.send(Buffer.from(out.csv));
+})
+app.listen(port, () => console.log(`Server is listening to port ${port}`))
 
 
-// header: [
-//     { id: 'firstName', title: 'FirstName' },
-//     { id: 'lastName', title: 'LastName' },
-//     { id: 'county', title: 'Country' },
-//     { id: 'city', title: 'City' },
-//     { id: 'role', title: 'Role' },
-//     { id: 'sales', title: 'Sales' },
-// ]
-// });
 
-// const data = req.body;
-// console.log(data)
+
+
